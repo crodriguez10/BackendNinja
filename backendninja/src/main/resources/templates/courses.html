@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="course: ${courses} ">
+                    <td><span th:text="${course.id}"></span> </td>
+                    <td><span th:text="${course.name}"></span> </td>
+                    <td><span th:text="${course.description}"></span> </td>
+                    <td><span th:text="${course.price}"></span> </td>
+                    <td><span th:text="${course.hours}"></span> </td>
+                </tr>
+            </tbody>
+        </table>
+        <form action="#" th:action="@{/course/guardarcurso}" th:object="${course}" method="post">
+            <p>Name: <input type="text" th:field="*{name}"/></p>
+            <p>Description: <input type="text" th:field="*{description}"/></p>
+            <p>Price: <input type="number" th:field="*{price}"/></p>
+            <p>Hours: <input type="number" th:field="*{hours}"/></p>
+            <p><input type="submit" value="Submit" /></p>
+        </form>
+    </body>
+</html>
