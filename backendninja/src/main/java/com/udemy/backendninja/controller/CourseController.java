@@ -5,6 +5,7 @@
  */
 package com.udemy.backendninja.controller;
 
+import com.udemy.backendninja.Model.CourseModel;
 import com.udemy.backendninja.entity.Course;
 import com.udemy.backendninja.service.CourseService;
 import org.apache.commons.logging.Log;
@@ -42,9 +43,9 @@ public class CourseController {
     }
     
     @PostMapping("/guardarcurso")
-    public String addCourse(@ModelAttribute("course") Course course){
-        LOG.info("call: addCourse() --PARAMS-------"+course);
-        courseService.saveCourse(course);
+    public String addCourse(@ModelAttribute("course") CourseModel courseModel){
+        LOG.info("call: addCourse() --PARAMS-------"+courseModel);
+        courseService.saveCourse(courseModel);
         return "redirect:/course/listarcursos";
     }
 }

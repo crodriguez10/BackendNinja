@@ -5,9 +5,12 @@
  */
 package com.udemy.backendninja.service.impl;
 
+import com.udemy.backendninja.Model.CourseModel;
+import com.udemy.backendninja.converter.CourseConverter;
 import com.udemy.backendninja.entity.Course;
 import com.udemy.backendninja.repository.CourseRepository;
 import com.udemy.backendninja.service.CourseService;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,23 +29,33 @@ public class CourseServiceImpl implements CourseService{
     @Qualifier("courseRepository")        
     CourseRepository courseRepository;
     
+    @Autowired
+    @Qualifier("courseConverter")
+    CourseConverter courseConverter;
+    
     private static final Log LOG =  LogFactory.getLog(CourseServiceImpl.class);
     
     @Override
-    public List<Course> findAllCourses() {
+    public List<CourseModel> findAllCourses() {
         LOG.info("Call: findAllCourses()");
-        return courseRepository.findAll();
+        List<CourseModel> listCourseModel = new ArrayList<>();
+        
+        courseRepository.findAll().forEach((course) -> {
+            listCourseModel.add(courseConverter.entity2Model(course));
+        });
+        
+        return listCourseModel;
     }
 
     @Override
-    public Course saveCourse(Course course) {
+    public CourseModel saveCourse(CourseModel courseModel) {
         LOG.info("Call: saveCourse()");
-        return courseRepository.save(course);
+        return courseConverter.entity2Model(courseRepository.save(courseConverter.model2Entity(courseModel)));
     }
 
     @Override
-    public Course updateCourse(Course course) {
-        return courseRepository.save(course);
+    public CourseModel updateCourse(CourseModel courseModel) {
+        return courseConverter.entity2Model(courseRepository.save(courseConverter.model2Entity(courseModel)));
     }
 
     @Override

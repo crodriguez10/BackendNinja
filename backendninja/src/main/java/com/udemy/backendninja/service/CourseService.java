@@ -5,6 +5,7 @@
  */
 package com.udemy.backendninja.service;
 
+import com.udemy.backendninja.Model.CourseModel;
 import com.udemy.backendninja.entity.Course;
 import com.udemy.backendninja.repository.CourseRepository;
 import java.util.List;
@@ -15,11 +16,11 @@ import java.util.List;
  */
 public interface CourseService{
     
-    public List<Course> findAllCourses(); 
+    public List<CourseModel> findAllCourses(); 
     
-    public Course saveCourse(Course course);
+    public CourseModel saveCourse(CourseModel course);
     
-    public Course updateCourse(Course course);
+    public CourseModel updateCourse(CourseModel course);
     
     public int deleteCourse(int id);
 }
